@@ -13,6 +13,6 @@ alias grun='java -cp $CLASSPATH org.antlr.v4.gui.TestRig'
 ````
 
 ## Usual procedure:
-antlr4 BooleanExpressions.g4
+antlr4 BooleanExpressions.g4  
 javac -cp .:/opt/homebrew/Cellar/antlr/4.13.2/antlr-4.13.2-complete.jar *.java   
-grun BooleanExpressions entryExpression input.txt -gui
+grun BooleanExpressions entryExpression input.txt -gui  

@@ -22,7 +22,7 @@ booleanExpression
     : '-' booleanExpression                     # NegationExpression        // Logical NOT (highest precedence)
     | '(' booleanExpression ')'                 # ParenthesizedExpression   // Parentheses for grouping expressions
     | booleanExpression '&' booleanExpression   # AndExpression             // Logical AND (left-associative, medium precedence)
-    | booleanExpression '+' booleanExpression   # OrExpression            // Logical OR (left-associative, lowest precedence)
+    | booleanExpression '+' booleanExpression   # OrExpression              // Logical OR (left-associative, lowest precedence)
     | IDENTIFIER                                # Variable                  // Boolean variable (e.g., A, B, C)
     | BOOLEAN                                   # BooleanConstant           // Boolean constants 0 or 1
     ;

@@ -28,25 +28,13 @@ public class BooleanExpressionsBaseListener implements BooleanExpressionsListene
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSingleEntryExpression(BooleanExpressionsParser.SingleEntryExpressionContext ctx) { }
+	@Override public void enterStat(BooleanExpressionsParser.StatContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSingleEntryExpression(BooleanExpressionsParser.SingleEntryExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterParameters(BooleanExpressionsParser.ParametersContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitParameters(BooleanExpressionsParser.ParametersContext ctx) { }
+	@Override public void exitStat(BooleanExpressionsParser.StatContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

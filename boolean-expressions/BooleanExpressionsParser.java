@@ -16,28 +16,27 @@ public class BooleanExpressionsParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, IDENTIFIER=8, 
-		BOOLEAN=9, WS=10;
+		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, IDENTIFIER=7, BOOLEAN_CONST=8, 
+		LINEBREAK=9, WS=10;
 	public static final int
-		RULE_entryExpression = 0, RULE_singleEntryExpression = 1, RULE_parameters = 2, 
-		RULE_booleanExpression = 3;
+		RULE_entryExpression = 0, RULE_stat = 1, RULE_expr = 2;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"entryExpression", "singleEntryExpression", "parameters", "booleanExpression"
+			"entryExpression", "stat", "expr"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'('", "')'", "'='", "','", "'-'", "'&'", "'+'"
+			null, "'='", "'-'", "'('", "')'", "'&'", "'+'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, null, null, null, null, null, null, "IDENTIFIER", "BOOLEAN", 
-			"WS"
+			null, null, null, null, null, null, null, "IDENTIFIER", "BOOLEAN_CONST", 
+			"LINEBREAK", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -93,12 +92,11 @@ public class BooleanExpressionsParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class EntryExpressionContext extends ParserRuleContext {
-		public TerminalNode EOF() { return getToken(BooleanExpressionsParser.EOF, 0); }
-		public List<SingleEntryExpressionContext> singleEntryExpression() {
-			return getRuleContexts(SingleEntryExpressionContext.class);
+		public List<StatContext> stat() {
+			return getRuleContexts(StatContext.class);
 		}
-		public SingleEntryExpressionContext singleEntryExpression(int i) {
-			return getRuleContext(SingleEntryExpressionContext.class,i);
+		public StatContext stat(int i) {
+			return getRuleContext(StatContext.class,i);
 		}
 		public EntryExpressionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -121,22 +119,20 @@ public class BooleanExpressionsParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(9); 
+			setState(7); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(8);
-				singleEntryExpression();
+				setState(6);
+				stat();
 				}
 				}
-				setState(11); 
+				setState(9); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( _la==IDENTIFIER );
-			setState(13);
-			match(EOF);
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 908L) != 0) );
 			}
 		}
 		catch (RecognitionException re) {
@@ -151,104 +147,62 @@ public class BooleanExpressionsParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class SingleEntryExpressionContext extends ParserRuleContext {
+	public static class StatContext extends ParserRuleContext {
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
+		public TerminalNode LINEBREAK() { return getToken(BooleanExpressionsParser.LINEBREAK, 0); }
 		public TerminalNode IDENTIFIER() { return getToken(BooleanExpressionsParser.IDENTIFIER, 0); }
-		public ParametersContext parameters() {
-			return getRuleContext(ParametersContext.class,0);
-		}
-		public BooleanExpressionContext booleanExpression() {
-			return getRuleContext(BooleanExpressionContext.class,0);
-		}
-		public SingleEntryExpressionContext(ParserRuleContext parent, int invokingState) {
+		public StatContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_singleEntryExpression; }
+		@Override public int getRuleIndex() { return RULE_stat; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof BooleanExpressionsListener ) ((BooleanExpressionsListener)listener).enterSingleEntryExpression(this);
+			if ( listener instanceof BooleanExpressionsListener ) ((BooleanExpressionsListener)listener).enterStat(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof BooleanExpressionsListener ) ((BooleanExpressionsListener)listener).exitSingleEntryExpression(this);
+			if ( listener instanceof BooleanExpressionsListener ) ((BooleanExpressionsListener)listener).exitStat(this);
 		}
 	}
 
-	public final SingleEntryExpressionContext singleEntryExpression() throws RecognitionException {
-		SingleEntryExpressionContext _localctx = new SingleEntryExpressionContext(_ctx, getState());
-		enterRule(_localctx, 2, RULE_singleEntryExpression);
+	public final StatContext stat() throws RecognitionException {
+		StatContext _localctx = new StatContext(_ctx, getState());
+		enterRule(_localctx, 2, RULE_stat);
 		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(15);
-			match(IDENTIFIER);
-			setState(16);
-			match(T__0);
-			setState(17);
-			parameters();
-			setState(18);
-			match(T__1);
-			setState(19);
-			match(T__2);
 			setState(20);
-			booleanExpression(0);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class ParametersContext extends ParserRuleContext {
-		public List<TerminalNode> IDENTIFIER() { return getTokens(BooleanExpressionsParser.IDENTIFIER); }
-		public TerminalNode IDENTIFIER(int i) {
-			return getToken(BooleanExpressionsParser.IDENTIFIER, i);
-		}
-		public ParametersContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_parameters; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof BooleanExpressionsListener ) ((BooleanExpressionsListener)listener).enterParameters(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof BooleanExpressionsListener ) ((BooleanExpressionsListener)listener).exitParameters(this);
-		}
-	}
-
-	public final ParametersContext parameters() throws RecognitionException {
-		ParametersContext _localctx = new ParametersContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_parameters);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(22);
-			match(IDENTIFIER);
-			setState(27);
 			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while (_la==T__3) {
+			switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
+			case 1:
+				enterOuterAlt(_localctx, 1);
 				{
+				setState(11);
+				expr(0);
+				setState(12);
+				match(LINEBREAK);
+				}
+				break;
+			case 2:
+				enterOuterAlt(_localctx, 2);
 				{
-				setState(23);
-				match(T__3);
-				setState(24);
+				setState(14);
 				match(IDENTIFIER);
+				setState(15);
+				match(T__0);
+				setState(16);
+				expr(0);
+				setState(17);
+				match(LINEBREAK);
 				}
+				break;
+			case 3:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(19);
+				match(LINEBREAK);
 				}
-				setState(29);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
+				break;
 			}
 		}
 		catch (RecognitionException re) {
@@ -263,23 +217,23 @@ public class BooleanExpressionsParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class BooleanExpressionContext extends ParserRuleContext {
-		public BooleanExpressionContext(ParserRuleContext parent, int invokingState) {
+	public static class ExprContext extends ParserRuleContext {
+		public ExprContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_booleanExpression; }
+		@Override public int getRuleIndex() { return RULE_expr; }
 	 
-		public BooleanExpressionContext() { }
-		public void copyFrom(BooleanExpressionContext ctx) {
+		public ExprContext() { }
+		public void copyFrom(ExprContext ctx) {
 			super.copyFrom(ctx);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class ParenthesizedExpressionContext extends BooleanExpressionContext {
-		public BooleanExpressionContext booleanExpression() {
-			return getRuleContext(BooleanExpressionContext.class,0);
+	public static class ParenthesizedExpressionContext extends ExprContext {
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
 		}
-		public ParenthesizedExpressionContext(BooleanExpressionContext ctx) { copyFrom(ctx); }
+		public ParenthesizedExpressionContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
 			if ( listener instanceof BooleanExpressionsListener ) ((BooleanExpressionsListener)listener).enterParenthesizedExpression(this);
@@ -290,9 +244,9 @@ public class BooleanExpressionsParser extends Parser {
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class VariableContext extends BooleanExpressionContext {
+	public static class VariableContext extends ExprContext {
 		public TerminalNode IDENTIFIER() { return getToken(BooleanExpressionsParser.IDENTIFIER, 0); }
-		public VariableContext(BooleanExpressionContext ctx) { copyFrom(ctx); }
+		public VariableContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
 			if ( listener instanceof BooleanExpressionsListener ) ((BooleanExpressionsListener)listener).enterVariable(this);
@@ -303,14 +257,16 @@ public class BooleanExpressionsParser extends Parser {
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class AndExpressionContext extends BooleanExpressionContext {
-		public List<BooleanExpressionContext> booleanExpression() {
-			return getRuleContexts(BooleanExpressionContext.class);
+	public static class AndExpressionContext extends ExprContext {
+		public ExprContext left;
+		public ExprContext right;
+		public List<ExprContext> expr() {
+			return getRuleContexts(ExprContext.class);
 		}
-		public BooleanExpressionContext booleanExpression(int i) {
-			return getRuleContext(BooleanExpressionContext.class,i);
+		public ExprContext expr(int i) {
+			return getRuleContext(ExprContext.class,i);
 		}
-		public AndExpressionContext(BooleanExpressionContext ctx) { copyFrom(ctx); }
+		public AndExpressionContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
 			if ( listener instanceof BooleanExpressionsListener ) ((BooleanExpressionsListener)listener).enterAndExpression(this);
@@ -321,9 +277,9 @@ public class BooleanExpressionsParser extends Parser {
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class BooleanConstantContext extends BooleanExpressionContext {
-		public TerminalNode BOOLEAN() { return getToken(BooleanExpressionsParser.BOOLEAN, 0); }
-		public BooleanConstantContext(BooleanExpressionContext ctx) { copyFrom(ctx); }
+	public static class BooleanConstantContext extends ExprContext {
+		public TerminalNode BOOLEAN_CONST() { return getToken(BooleanExpressionsParser.BOOLEAN_CONST, 0); }
+		public BooleanConstantContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
 			if ( listener instanceof BooleanExpressionsListener ) ((BooleanExpressionsListener)listener).enterBooleanConstant(this);
@@ -334,14 +290,16 @@ public class BooleanExpressionsParser extends Parser {
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class OrExpressionContext extends BooleanExpressionContext {
-		public List<BooleanExpressionContext> booleanExpression() {
-			return getRuleContexts(BooleanExpressionContext.class);
+	public static class OrExpressionContext extends ExprContext {
+		public ExprContext left;
+		public ExprContext right;
+		public List<ExprContext> expr() {
+			return getRuleContexts(ExprContext.class);
 		}
-		public BooleanExpressionContext booleanExpression(int i) {
-			return getRuleContext(BooleanExpressionContext.class,i);
+		public ExprContext expr(int i) {
+			return getRuleContext(ExprContext.class,i);
 		}
-		public OrExpressionContext(BooleanExpressionContext ctx) { copyFrom(ctx); }
+		public OrExpressionContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
 			if ( listener instanceof BooleanExpressionsListener ) ((BooleanExpressionsListener)listener).enterOrExpression(this);
@@ -352,11 +310,11 @@ public class BooleanExpressionsParser extends Parser {
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class NegationExpressionContext extends BooleanExpressionContext {
-		public BooleanExpressionContext booleanExpression() {
-			return getRuleContext(BooleanExpressionContext.class,0);
+	public static class NegationExpressionContext extends ExprContext {
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
 		}
-		public NegationExpressionContext(BooleanExpressionContext ctx) { copyFrom(ctx); }
+		public NegationExpressionContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
 			if ( listener instanceof BooleanExpressionsListener ) ((BooleanExpressionsListener)listener).enterNegationExpression(this);
@@ -367,47 +325,47 @@ public class BooleanExpressionsParser extends Parser {
 		}
 	}
 
-	public final BooleanExpressionContext booleanExpression() throws RecognitionException {
-		return booleanExpression(0);
+	public final ExprContext expr() throws RecognitionException {
+		return expr(0);
 	}
 
-	private BooleanExpressionContext booleanExpression(int _p) throws RecognitionException {
+	private ExprContext expr(int _p) throws RecognitionException {
 		ParserRuleContext _parentctx = _ctx;
 		int _parentState = getState();
-		BooleanExpressionContext _localctx = new BooleanExpressionContext(_ctx, _parentState);
-		BooleanExpressionContext _prevctx = _localctx;
-		int _startState = 6;
-		enterRecursionRule(_localctx, 6, RULE_booleanExpression, _p);
+		ExprContext _localctx = new ExprContext(_ctx, _parentState);
+		ExprContext _prevctx = _localctx;
+		int _startState = 4;
+		enterRecursionRule(_localctx, 4, RULE_expr, _p);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(39);
+			setState(31);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T__4:
+			case T__1:
 				{
 				_localctx = new NegationExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
-				setState(31);
-				match(T__4);
-				setState(32);
-				booleanExpression(6);
+				setState(23);
+				match(T__1);
+				setState(24);
+				expr(6);
 				}
 				break;
-			case T__0:
+			case T__2:
 				{
 				_localctx = new ParenthesizedExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(33);
-				match(T__0);
-				setState(34);
-				booleanExpression(0);
-				setState(35);
-				match(T__1);
+				setState(25);
+				match(T__2);
+				setState(26);
+				expr(0);
+				setState(27);
+				match(T__3);
 				}
 				break;
 			case IDENTIFIER:
@@ -415,24 +373,24 @@ public class BooleanExpressionsParser extends Parser {
 				_localctx = new VariableContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(37);
+				setState(29);
 				match(IDENTIFIER);
 				}
 				break;
-			case BOOLEAN:
+			case BOOLEAN_CONST:
 				{
 				_localctx = new BooleanConstantContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(38);
-				match(BOOLEAN);
+				setState(30);
+				match(BOOLEAN_CONST);
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(49);
+			setState(41);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -440,37 +398,39 @@ public class BooleanExpressionsParser extends Parser {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(47);
+					setState(39);
 					_errHandler.sync(this);
 					switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
 					case 1:
 						{
-						_localctx = new AndExpressionContext(new BooleanExpressionContext(_parentctx, _parentState));
-						pushNewRecursionContext(_localctx, _startState, RULE_booleanExpression);
-						setState(41);
+						_localctx = new AndExpressionContext(new ExprContext(_parentctx, _parentState));
+						((AndExpressionContext)_localctx).left = _prevctx;
+						pushNewRecursionContext(_localctx, _startState, RULE_expr);
+						setState(33);
 						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
-						setState(42);
-						match(T__5);
-						setState(43);
-						booleanExpression(5);
+						setState(34);
+						match(T__4);
+						setState(35);
+						((AndExpressionContext)_localctx).right = expr(5);
 						}
 						break;
 					case 2:
 						{
-						_localctx = new OrExpressionContext(new BooleanExpressionContext(_parentctx, _parentState));
-						pushNewRecursionContext(_localctx, _startState, RULE_booleanExpression);
-						setState(44);
+						_localctx = new OrExpressionContext(new ExprContext(_parentctx, _parentState));
+						((OrExpressionContext)_localctx).left = _prevctx;
+						pushNewRecursionContext(_localctx, _startState, RULE_expr);
+						setState(36);
 						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
-						setState(45);
-						match(T__6);
-						setState(46);
-						booleanExpression(4);
+						setState(37);
+						match(T__5);
+						setState(38);
+						((OrExpressionContext)_localctx).right = expr(4);
 						}
 						break;
 					}
 					} 
 				}
-				setState(51);
+				setState(43);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
 			}
@@ -489,12 +449,12 @@ public class BooleanExpressionsParser extends Parser {
 
 	public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
 		switch (ruleIndex) {
-		case 3:
-			return booleanExpression_sempred((BooleanExpressionContext)_localctx, predIndex);
+		case 2:
+			return expr_sempred((ExprContext)_localctx, predIndex);
 		}
 		return true;
 	}
-	private boolean booleanExpression_sempred(BooleanExpressionContext _localctx, int predIndex) {
+	private boolean expr_sempred(ExprContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 0:
 			return precpred(_ctx, 4);
@@ -505,40 +465,37 @@ public class BooleanExpressionsParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\n5\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
-		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0001\u0000\u0004\u0000\n\b"+
-		"\u0000\u000b\u0000\f\u0000\u000b\u0001\u0000\u0001\u0000\u0001\u0001\u0001"+
-		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
-		"\u0002\u0001\u0002\u0001\u0002\u0005\u0002\u001a\b\u0002\n\u0002\f\u0002"+
-		"\u001d\t\u0002\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003"+
-		"\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0003\u0003(\b\u0003"+
-		"\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003"+
-		"\u0005\u00030\b\u0003\n\u0003\f\u00033\t\u0003\u0001\u0003\u0000\u0001"+
-		"\u0006\u0004\u0000\u0002\u0004\u0006\u0000\u00007\u0000\t\u0001\u0000"+
-		"\u0000\u0000\u0002\u000f\u0001\u0000\u0000\u0000\u0004\u0016\u0001\u0000"+
-		"\u0000\u0000\u0006\'\u0001\u0000\u0000\u0000\b\n\u0003\u0002\u0001\u0000"+
-		"\t\b\u0001\u0000\u0000\u0000\n\u000b\u0001\u0000\u0000\u0000\u000b\t\u0001"+
-		"\u0000\u0000\u0000\u000b\f\u0001\u0000\u0000\u0000\f\r\u0001\u0000\u0000"+
-		"\u0000\r\u000e\u0005\u0000\u0000\u0001\u000e\u0001\u0001\u0000\u0000\u0000"+
-		"\u000f\u0010\u0005\b\u0000\u0000\u0010\u0011\u0005\u0001\u0000\u0000\u0011"+
-		"\u0012\u0003\u0004\u0002\u0000\u0012\u0013\u0005\u0002\u0000\u0000\u0013"+
-		"\u0014\u0005\u0003\u0000\u0000\u0014\u0015\u0003\u0006\u0003\u0000\u0015"+
-		"\u0003\u0001\u0000\u0000\u0000\u0016\u001b\u0005\b\u0000\u0000\u0017\u0018"+
-		"\u0005\u0004\u0000\u0000\u0018\u001a\u0005\b\u0000\u0000\u0019\u0017\u0001"+
-		"\u0000\u0000\u0000\u001a\u001d\u0001\u0000\u0000\u0000\u001b\u0019\u0001"+
-		"\u0000\u0000\u0000\u001b\u001c\u0001\u0000\u0000\u0000\u001c\u0005\u0001"+
-		"\u0000\u0000\u0000\u001d\u001b\u0001\u0000\u0000\u0000\u001e\u001f\u0006"+
-		"\u0003\uffff\uffff\u0000\u001f \u0005\u0005\u0000\u0000 (\u0003\u0006"+
-		"\u0003\u0006!\"\u0005\u0001\u0000\u0000\"#\u0003\u0006\u0003\u0000#$\u0005"+
-		"\u0002\u0000\u0000$(\u0001\u0000\u0000\u0000%(\u0005\b\u0000\u0000&(\u0005"+
-		"\t\u0000\u0000\'\u001e\u0001\u0000\u0000\u0000\'!\u0001\u0000\u0000\u0000"+
-		"\'%\u0001\u0000\u0000\u0000\'&\u0001\u0000\u0000\u0000(1\u0001\u0000\u0000"+
-		"\u0000)*\n\u0004\u0000\u0000*+\u0005\u0006\u0000\u0000+0\u0003\u0006\u0003"+
-		"\u0005,-\n\u0003\u0000\u0000-.\u0005\u0007\u0000\u0000.0\u0003\u0006\u0003"+
-		"\u0004/)\u0001\u0000\u0000\u0000/,\u0001\u0000\u0000\u000003\u0001\u0000"+
-		"\u0000\u00001/\u0001\u0000\u0000\u000012\u0001\u0000\u0000\u00002\u0007"+
-		"\u0001\u0000\u0000\u000031\u0001\u0000\u0000\u0000\u0005\u000b\u001b\'"+
-		"/1";
+		"\u0004\u0001\n-\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0002\u0007\u0002\u0001\u0000\u0004\u0000\b\b\u0000\u000b\u0000\f\u0000"+
+		"\t\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
+		"\u0001\u0001\u0001\u0001\u0001\u0001\u0003\u0001\u0015\b\u0001\u0001\u0002"+
+		"\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002"+
+		"\u0001\u0002\u0001\u0002\u0003\u0002 \b\u0002\u0001\u0002\u0001\u0002"+
+		"\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0005\u0002(\b\u0002"+
+		"\n\u0002\f\u0002+\t\u0002\u0001\u0002\u0000\u0001\u0004\u0003\u0000\u0002"+
+		"\u0004\u0000\u00001\u0000\u0007\u0001\u0000\u0000\u0000\u0002\u0014\u0001"+
+		"\u0000\u0000\u0000\u0004\u001f\u0001\u0000\u0000\u0000\u0006\b\u0003\u0002"+
+		"\u0001\u0000\u0007\u0006\u0001\u0000\u0000\u0000\b\t\u0001\u0000\u0000"+
+		"\u0000\t\u0007\u0001\u0000\u0000\u0000\t\n\u0001\u0000\u0000\u0000\n\u0001"+
+		"\u0001\u0000\u0000\u0000\u000b\f\u0003\u0004\u0002\u0000\f\r\u0005\t\u0000"+
+		"\u0000\r\u0015\u0001\u0000\u0000\u0000\u000e\u000f\u0005\u0007\u0000\u0000"+
+		"\u000f\u0010\u0005\u0001\u0000\u0000\u0010\u0011\u0003\u0004\u0002\u0000"+
+		"\u0011\u0012\u0005\t\u0000\u0000\u0012\u0015\u0001\u0000\u0000\u0000\u0013"+
+		"\u0015\u0005\t\u0000\u0000\u0014\u000b\u0001\u0000\u0000\u0000\u0014\u000e"+
+		"\u0001\u0000\u0000\u0000\u0014\u0013\u0001\u0000\u0000\u0000\u0015\u0003"+
+		"\u0001\u0000\u0000\u0000\u0016\u0017\u0006\u0002\uffff\uffff\u0000\u0017"+
+		"\u0018\u0005\u0002\u0000\u0000\u0018 \u0003\u0004\u0002\u0006\u0019\u001a"+
+		"\u0005\u0003\u0000\u0000\u001a\u001b\u0003\u0004\u0002\u0000\u001b\u001c"+
+		"\u0005\u0004\u0000\u0000\u001c \u0001\u0000\u0000\u0000\u001d \u0005\u0007"+
+		"\u0000\u0000\u001e \u0005\b\u0000\u0000\u001f\u0016\u0001\u0000\u0000"+
+		"\u0000\u001f\u0019\u0001\u0000\u0000\u0000\u001f\u001d\u0001\u0000\u0000"+
+		"\u0000\u001f\u001e\u0001\u0000\u0000\u0000 )\u0001\u0000\u0000\u0000!"+
+		"\"\n\u0004\u0000\u0000\"#\u0005\u0005\u0000\u0000#(\u0003\u0004\u0002"+
+		"\u0005$%\n\u0003\u0000\u0000%&\u0005\u0006\u0000\u0000&(\u0003\u0004\u0002"+
+		"\u0004\'!\u0001\u0000\u0000\u0000\'$\u0001\u0000\u0000\u0000(+\u0001\u0000"+
+		"\u0000\u0000)\'\u0001\u0000\u0000\u0000)*\u0001\u0000\u0000\u0000*\u0005"+
+		"\u0001\u0000\u0000\u0000+)\u0001\u0000\u0000\u0000\u0005\t\u0014\u001f"+
+		"\')";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
